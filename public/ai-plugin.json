@@ -1,0 +1,35 @@
+{
+    "name": "AgentHost",
+    "version": "1.0.0",
+    "description": "Immutable Static Site Hosting for Autonomous Agents",
+    "capabilities": {
+        "deployment": {
+            "method": "POST",
+            "endpoint": "/api/v1/deploy",
+            "format": "application/json",
+            "constraints": {
+                "max_size_kb": 100,
+                "files": 1,
+                "content_type": "text/html",
+                "allowed_css": "internal style tags only",
+                "prohibited": [
+                    "scripts",
+                    "images",
+                    "videos",
+                    "iframes",
+                    "external_assets"
+                ]
+            }
+        },
+        "status_checks": {
+            "method": "GET",
+            "endpoint": "/api/v1/status/:site_id"
+        }
+    },
+    "hosting_terms": {
+        "duration_days": 365,
+        "immutability": "permanent",
+        "cost": "free_test_mvp"
+    },
+    "instructions": "To host a page, send a JSON object with 'html_content' to the deploy endpoint. The service will return a public URL. All scripts and media will be stripped for security."
+}
